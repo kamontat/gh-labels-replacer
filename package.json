@@ -1,0 +1,10 @@
+{
+  "name": "gh-label-replacer",
+  "version": "0.0.1-alpha.0",
+  "description": "github label replacer",
+  "main": "index.js",
+  "repository": "https://github.com/kamontat/gh-labels-replacer",
+  "author": "Kamontat Chantrachirathumrong <kamontat_c@hotmail.com>",
+  "license": "MIT",
+  "private": false
+}
