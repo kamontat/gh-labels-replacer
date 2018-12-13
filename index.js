@@ -107,6 +107,13 @@ const copy = async (req, res) => {
   }
 };
 
+app.get("/", async (req, res) => {
+  res.send(`# APIs <br/><br/>
+* list all labels on path /list/:user/:repo <br/>
+* copy labels on path     /copy/:currentUser/:currentRepo/:destUser/:destRepo <br/>
+`);
+});
+
 app.get("/list/:user/:repo", async (req, res) => {
   markAuthentication();
   await list(req, res);
