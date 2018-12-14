@@ -56,10 +56,13 @@ const _list = async (owner, repo) => {
   console.info(`[debug] list first 100 label in ${owner}/${repo}`);
   const result = await octokit.issues.listLabelsForRepo({ owner, repo, per_page: 100 });
   return result.data.map(v => {
+    console.log(v);
+
     return {
       name: v.name,
       color: v.color,
-      description: v.description
+      description: v.description,
+      url: v.url.replace("https://api.github.com/repos/", "https://github.com/")
     };
   });
 };
@@ -139,6 +142,23 @@ app.get("/copy/:currentUser/:currentRepo/:destUser/:destRepo", async (req, res) 
 app.get("/copy/:currentUser/:currentRepo/:destUser/:destRepo/(:token)?", async (req, res) => {
   markAuthentication(req.params.token);
   await copy(req, res);
+});
+
+app.get("/generate/:user/:repo", async (req, res) => {
+  const list = await _list(req.params.user, req.params.repo);
+
+  res.send(
+    `<pre>${list
+      .map((label, index) => {
+        const i = index + 1;
+        const color = label.color.toUpperCase();
+
+        return `${i}. name: [${label.name}](${label.url})
+    - color: ![${color}](https://placehold.it/15/${color}/000000?text=+) \`#${color}\`
+    - description: **${label.description}**`;
+      })
+      .join("\n")}</pre>`
+  );
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
