@@ -82,20 +82,10 @@ const list = async (req, res) => {
   }
 };
 
-const copy = async (req, res) => {
+const _copy = async (current, dest, _option) => {
   const option = {
-    force: req.query.force || true,
-    all: req.query.all || true
-  };
-
-  const current = {
-    owner: req.params.currentUser,
-    repo: req.params.currentRepo
-  };
-
-  const dest = {
-    owner: req.params.destUser,
-    repo: req.params.destRepo
+    force: _option.force || true,
+    all: _option.all || true
   };
 
   console.info(`[info] copy labels from ${current.owner}/${current.repo} to ${dest.owner}/${dest.repo}`);
@@ -113,14 +103,31 @@ const copy = async (req, res) => {
       })
     );
 
-    res.send({ results });
+    return results;
   }
+};
+
+const copy = async (req, res) => {
+  const current = {
+    owner: req.params.currentUser,
+    repo: req.params.currentRepo
+  };
+
+  const dest = {
+    owner: req.params.destUser,
+    repo: req.params.destRepo
+  };
+
+  const results = await _copy(current, dest, req.query);
+  res.send({ results });
 };
 
 app.get("/", async (req, res) => {
   res.send(`# APIs <br/><br/>
 * list all labels on path /list/:user/:repo <br/>
 * copy labels on path     /copy/:currentUser/:currentRepo/:destUser/:destRepo <br/>
+* copy labels via query   /copy?owner=<dest_owner>&repo=<dest_repo>&cOwner=<current_owner|GH-Label>&cRepo=<current_repo|Agile-Template>
+* copy default            /copy/d/:user/:repo?root=<repo_in_GH-Label|Agile-Template>
 `);
 });
 
@@ -142,6 +149,37 @@ app.get("/copy/:currentUser/:currentRepo/:destUser/:destRepo", async (req, res) 
 app.get("/copy/:currentUser/:currentRepo/:destUser/:destRepo/(:token)?", async (req, res) => {
   markAuthentication(req.params.token);
   await copy(req, res);
+});
+
+app.get("/copy", async (req, res) => {
+  const option = req.query;
+  const current = {
+    owner: req.query.cOwner || "GH-Label",
+    repo: req.query.cRepo || "Agile-Template"
+  };
+
+  const dest = {
+    owner: req.query.dOwner || req.query.owner,
+    repo: req.query.dRepo || req.query.repo
+  };
+
+  const results = await _copy(current, dest, option);
+  res.send({ results });
+});
+
+app.get("/copy/d/:user/:repo", async (req, res) => {
+  const option = req.query;
+  const current = {
+    repo: req.query.root || "Agile-Template"
+  };
+
+  const dest = {
+    owner: req.params.user,
+    repo: req.params.repo
+  };
+
+  const results = await _copy(current, dest, option);
+  res.send({ results });
 });
 
 app.get("/generate/:user/:repo", async (req, res) => {
