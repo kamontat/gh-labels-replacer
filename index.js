@@ -28,6 +28,8 @@ const markAuthentication = _token => {
 };
 
 const _create = async (owner, repo, label) => {
+  console.info(`[debug] create labels=${label.name},${label.color},${label.description} on ${owner}/${repo}`);
+
   const result = await octokit.issues.createLabel({
     owner,
     repo,
@@ -40,6 +42,7 @@ const _create = async (owner, repo, label) => {
 };
 
 const _delete = async (owner, repo, name) => {
+  console.info(`[debug] delete label=${name} in ${owner}/${repo}`);
   if (typeof name === "string") return await octokit.issues.deleteLabel({ owner, repo, name });
   else return await Promise.all(name.map(n => octokit.issues.deleteLabel({ owner, repo, name: n })));
 };
@@ -50,6 +53,7 @@ const _deleteAll = async (owner, repo) => {
 };
 
 const _list = async (owner, repo) => {
+  console.info(`[debug] list first 100 label in ${owner}/${repo}`);
   const result = await octokit.issues.listLabelsForRepo({ owner, repo, per_page: 100 });
   return result.data.map(v => {
     return {
@@ -64,7 +68,7 @@ const list = async (req, res) => {
   const owner = req.params.user;
   const repo = req.params.repo;
 
-  console.log(`list labels owner=${owner}, repo=${repo}`);
+  console.info(`[info] list labels owner=${owner}, repo=${repo}`);
 
   try {
     res.send({
@@ -90,6 +94,9 @@ const copy = async (req, res) => {
     owner: req.params.destUser,
     repo: req.params.destRepo
   };
+
+  console.info(`[info] copy labels from ${current.owner}/${current.repo} to ${dest.owner}/${dest.repo}`);
+  console.info(`[info] copy option ${JSON.stringify(option)}`);
 
   if (option.force) {
     await _deleteAll(dest.owner, dest.repo);
