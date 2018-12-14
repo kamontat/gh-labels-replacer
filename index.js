@@ -127,6 +127,11 @@ const copy = async (req, res) => {
   }
 };
 
+app.get("/version", async (req, res) => {
+  const pkg = require("./package.json");
+  res.send(`${pkg.name}: ${pkg.version}`);
+});
+
 app.get("/", async (req, res) => {
   res.send(`<pre># APIs
 * list all labels on path /list/:user/:repo
@@ -134,6 +139,7 @@ app.get("/", async (req, res) => {
 * copy labels via query   /copy?owner=<dest_owner>&repo=<dest_repo>&cOwner=<current_owner|GH-Label>&cRepo=<current_repo|Agile-Template>
 * copy default            /copy/d/:user/:repo?root=<repo_in_GH-Label|Agile-Template> 
 
+* get version             /version
 
 ## param
 
