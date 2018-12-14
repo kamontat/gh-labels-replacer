@@ -54,6 +54,7 @@ const _deleteAll = async (owner, repo) => {
 
 const _list = async (owner, repo) => {
   console.info(`[debug] list first 100 label in ${owner}/${repo}`);
+
   const result = await octokit.issues.listLabelsForRepo({ owner, repo, per_page: 100 });
   return result.data.map(v => {
     console.log(v);
@@ -118,8 +119,12 @@ const copy = async (req, res) => {
     repo: req.params.destRepo
   };
 
-  const results = await _copy(current, dest, req.query);
-  res.send({ results });
+  try {
+    const results = await _copy(current, dest, req.query);
+    res.send({ results });
+  } catch (e) {
+    res.status(e.status || 400).send(e);
+  }
 };
 
 app.get("/", async (req, res) => {
@@ -160,8 +165,12 @@ app.get("/copy", async (req, res) => {
     repo: req.query.dRepo || req.query.repo
   };
 
-  const results = await _copy(current, dest, option);
-  res.send({ results });
+  try {
+    const results = await _copy(current, dest, option);
+    res.send({ results });
+  } catch (e) {
+    res.status(e.status || 400).send(e);
+  }
 });
 
 app.get("/copy/d/:user/:repo", async (req, res) => {
@@ -169,6 +178,7 @@ app.get("/copy/d/:user/:repo", async (req, res) => {
 
   const option = req.query;
   const current = {
+    owner: "GH-Label",
     repo: req.query.root || "Agile-Template"
   };
 
@@ -177,8 +187,12 @@ app.get("/copy/d/:user/:repo", async (req, res) => {
     repo: req.params.repo
   };
 
-  const results = await _copy(current, dest, option);
-  res.send({ results });
+  try {
+    const results = await _copy(current, dest, option);
+    res.send({ results });
+  } catch (e) {
+    res.status(e.status || 400).send(e);
+  }
 });
 
 app.get("/generate/:user/:repo", async (req, res) => {
