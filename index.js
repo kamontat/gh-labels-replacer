@@ -123,35 +123,32 @@ const copy = async (req, res) => {
 };
 
 app.get("/", async (req, res) => {
-  res.send(`# APIs <br/><br/>
-* list all labels on path /list/:user/:repo <br/>
-* copy labels on path     /copy/:currentUser/:currentRepo/:destUser/:destRepo <br/>
+  res.send(`<pre># APIs
+* list all labels on path /list/:user/:repo
+* copy labels on path     /copy/:currentUser/:currentRepo/:destUser/:destRepo
 * copy labels via query   /copy?owner=<dest_owner>&repo=<dest_repo>&cOwner=<current_owner|GH-Label>&cRepo=<current_repo|Agile-Template>
-* copy default            /copy/d/:user/:repo?root=<repo_in_GH-Label|Agile-Template>
-`);
+* copy default            /copy/d/:user/:repo?root=<repo_in_GH-Label|Agile-Template> 
+
+
+## param
+
+* every APIs include token params in case you want custom token (NOT recommend)
+</pre>`);
 });
 
 app.get("/list/:user/:repo", async (req, res) => {
-  markAuthentication();
-  await list(req, res);
-});
-
-app.get("/list/:user/:repo/(:token)?", async (req, res) => {
-  markAuthentication(req.params.token);
+  markAuthentication(req.query.token);
   await list(req, res);
 });
 
 app.get("/copy/:currentUser/:currentRepo/:destUser/:destRepo", async (req, res) => {
-  markAuthentication();
-  await copy(req, res);
-});
-
-app.get("/copy/:currentUser/:currentRepo/:destUser/:destRepo/(:token)?", async (req, res) => {
-  markAuthentication(req.params.token);
+  markAuthentication(req.query.token);
   await copy(req, res);
 });
 
 app.get("/copy", async (req, res) => {
+  markAuthentication(req.query.token);
+
   const option = req.query;
   const current = {
     owner: req.query.cOwner || "GH-Label",
@@ -168,6 +165,8 @@ app.get("/copy", async (req, res) => {
 });
 
 app.get("/copy/d/:user/:repo", async (req, res) => {
+  markAuthentication(req.query.token);
+
   const option = req.query;
   const current = {
     repo: req.query.root || "Agile-Template"
@@ -183,6 +182,8 @@ app.get("/copy/d/:user/:repo", async (req, res) => {
 });
 
 app.get("/generate/:user/:repo", async (req, res) => {
+  markAuthentication(req.query.token);
+
   const list = await _list(req.params.user, req.params.repo);
 
   res.send(
