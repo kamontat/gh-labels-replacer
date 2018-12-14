@@ -57,8 +57,6 @@ const _list = async (owner, repo) => {
 
   const result = await octokit.issues.listLabelsForRepo({ owner, repo, per_page: 100 });
   return result.data.map(v => {
-    console.log(v);
-
     return {
       name: v.name,
       color: v.color,
