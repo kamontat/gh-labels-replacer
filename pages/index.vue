@@ -67,7 +67,6 @@
 </template>
 
 <script>
-// import netlify from 'netlify-auth-providers'
 import netlifyIdentity from 'netlify-identity-widget'
 
 export default {
@@ -83,30 +82,13 @@ export default {
   async asyncData() {
     netlifyIdentity.init({})
 
-    netlifyIdentity.on('login', current => {
-      if (current) {
-        if (current.app_metadata.provider !== 'github') {
-          return { error: 'you must login with github provider only' }
-          return netlifyIdentity.logout()
-        } else
-          return {
-            email: current.email,
-            fullname: current.user_metadata.full_name,
-            token: current.token.access_token
-          }
+    const user = netlifyIdentity.currentUser()
+    if (user) {
+      return {
+        email: user.email,
+        fullname: user.user_metadata.full_name,
+        token: user.token.access_token
       }
-    })
-
-    const current = netlifyIdentity.currentUser()
-    if (current) {
-      if (current.app_metadata.provider !== 'github') {
-        return { error: 'you must login with github provider only' }
-        return netlifyIdentity.logout()
-      } else
-        return {
-          email: current.email,
-          fullname: current.user_metadata.full_name
-        }
     }
     return {}
   },
