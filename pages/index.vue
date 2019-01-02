@@ -113,7 +113,7 @@ const submitTransfer = (token, current, dest) => {
   console.log('Submit transfer the issue labels')
 
   octokit.authenticate({
-    type: 'token',
+    type: 'oauth',
     token: token
   })
 
