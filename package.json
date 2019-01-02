@@ -1,0 +1,33 @@
+{
+  "name": "gh-label-replacer",
+  "version": "1.0.0",
+  "description": "github label replacer",
+  "author": "Kamontat Chantrachirathumrong",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "precommit": "npm run lint"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.0.0",
+    "cross-env": "^5.2.0",
+    "netlify-auth-providers": "^1.0.0-alpha5",
+    "netlify-identity-widget": "^1.5.2",
+    "nuxt": "^2.0.0",
+    "nuxt-buefy": "^0.2.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.1",
+    "eslint": "^5.0.1",
+    "eslint-config-prettier": "^3.1.0",
+    "eslint-loader": "^2.0.0",
+    "eslint-plugin-prettier": "2.6.2",
+    "eslint-plugin-vue": "^4.0.0",
+    "nodemon": "^1.11.0",
+    "prettier": "1.14.3"
+  }
+}
