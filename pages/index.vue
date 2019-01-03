@@ -264,13 +264,17 @@ export default {
   async mounted() {
     if (this.callSubmit) {
       this.isLoading = true
-      this.response = await submitTransfer(
-        this.queryType,
-        this.token,
-        this.current,
-        this.dest,
-        this.options
-      )
+      try {
+        this.response = await submitTransfer(
+          this.queryType,
+          this.token,
+          this.current,
+          this.dest,
+          this.options
+        )
+      } catch (e) {
+        this.error = e
+      }
       this.isLoading = false
     }
   },
@@ -296,13 +300,17 @@ export default {
     },
     async submit() {
       this.isLoading = true
-      this.response = await submitTransfer(
-        this.queryType,
-        this.token,
-        this.current,
-        this.dest,
-        this.options
-      )
+      try {
+        this.response = await submitTransfer(
+          this.queryType,
+          this.token,
+          this.current,
+          this.dest,
+          this.options
+        )
+      } catch (e) {
+        this.error = e
+      }
       this.isLoading = false
     },
     updateByTemplate(template) {
