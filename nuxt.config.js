@@ -69,7 +69,6 @@ module.exports = {
    ** Build configuration
    */
   build: {
-    vendor: ['@fortawesome/fontawesome', '@fortawesome/fontawesome-free-solid'],
     /*
      ** You can extend webpack config here
      */
