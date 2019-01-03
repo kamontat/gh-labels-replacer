@@ -55,7 +55,9 @@ module.exports = {
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
     // Doc: https://buefy.github.io/#/documentation
-    'nuxt-buefy'
+    'nuxt-buefy',
+    'cookie-universal-nuxt',
+    'nuxt-fontawesome'
   ],
   /*
    ** Axios module configuration
@@ -68,6 +70,7 @@ module.exports = {
    ** Build configuration
    */
   build: {
+    vendor: ['@fortawesome/fontawesome', '@fortawesome/fontawesome-free-solid'],
     /*
      ** You can extend webpack config here
      */

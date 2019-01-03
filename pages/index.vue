@@ -1,20 +1,85 @@
 <template>
-  <section class="section">
+  <div class="section">
+    <b-loading 
+      :is-full-page="true" 
+      :active.sync="isLoading" 
+      :can-cancel="true"/>
     <section>
       <b-field horizontal>
         <p class="control">
           <button 
+            :disabled="token"
             class="button is-danger is-outlined"
             @click="login">
-            {{ token ? "Logout" : "Login" }}
+            {{ token ? "Signed" : "Login" }}
           </button>
+          <span 
+            :class="{'is-hidden': !token}" 
+            style="margin-left: 6px; vertical-align: -webkit-baseline-middle">with '{{ token }}'</span>
         </p>
       </b-field>
-      <b-field horizontal>
+      <b-field 
+        v-show="error"
+        horizontal 
+        label="Error">
         <div>
-          <h6>Error: {{ error }}</h6>
+          <h6>{{ error }}</h6>
         </div>
       </b-field>
+
+      <b-field 
+        horizontal 
+        label="Query type">
+        <b-dropdown v-model="queryType">
+          <button 
+            slot="trigger" 
+            class="button is-secondary" 
+            type="button">
+            <template 
+              v-for="type in queryTypes" 
+              v-if="queryType === type.name" >
+              <b-icon 
+                :key="type.name"
+                :icon="type.icon"/>
+              <span :key="'span-'+type.name">{{ type.name }}</span>
+            </template>
+            <b-icon icon="menu-down"/>
+          </button>
+
+          <b-dropdown-item 
+            v-for="type in queryTypes" 
+            :key="type.name"
+            :value="type.name">
+            <div class="media">
+              <b-icon 
+                :icon="type.icon"
+                class="media-left"/>
+              <div class="media-content">
+                <h3>{{ type.name }}</h3>
+                <small>{{ type.desc }}</small>
+              </div>
+            </div>
+          </b-dropdown-item>
+        </b-dropdown>
+      </b-field>
+
+      <b-field 
+        horizontal 
+        label="Templates" >
+        <b-field>
+          <p 
+            v-for="template in templates" 
+            :key="template.name"
+            class="control">
+            <button 
+              class="button" 
+              @click="updateByTemplate(template)">
+              {{ template.name }}
+            </button>
+          </p>
+        </b-field>
+      </b-field>
+
       <b-field 
         horizontal 
         label="Base" >
@@ -24,19 +89,20 @@
           </p>
           <b-input 
             v-model="current.owner"
-            placeholder="kamontat" 
+            placeholder="GH-Label" 
             expanded/>
           <p class="control">
             <span class="button is-static">/</span>
           </p>
           <b-input 
             v-model="current.repo"
-            placeholder="gh-labels-replacer" 
+            placeholder="Github-Default-Template" 
             expanded/>
         </b-field>
       </b-field>
 
       <b-field 
+        v-show="queryType === 'Copy'"
         horizontal 
         label="Destination" >
         <b-field>
@@ -56,72 +122,75 @@
             expanded/>
         </b-field>
       </b-field>
+      <b-field 
+        v-show="queryType === 'Copy'"
+        horizontal 
+        label="Options" >
+        <b-checkbox-button 
+          v-model="options"
+          native-value="replace"
+          type="is-danger">
+          <b-icon icon="check"/>
+          <span>Replace</span>
+        </b-checkbox-button>
+      </b-field>
       <b-field horizontal><!-- Label left empty for spacing -->
         <p class="control">
           <button 
             :disabled="!token" 
-            class="button is-primary"
+            class="button is-success"
             @click="submit">
-            Transfer
+            Submit
           </button>
         </p>
       </b-field>
     </section>
-    <div>
-      {{ response }}
+    <div class="response">
+      <list-as-table 
+        v-if="queryType==='List'" 
+        :data="response"/>
+      <div v-if="queryType==='Copy'" >
+        <completed 
+          :response="response" 
+          :base="current" 
+          :dest="dest"/>
+      </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
-import netlifyIdentity from 'netlify-identity-widget'
-import Octokit from '@octokit/rest'
+import netlify from 'netlify-auth-providers'
 
-const octokit = Octokit({
-  timeout: 0, // 0 means no request timeout
-  headers: {
-    accept: 'application/vnd.github.symmetra-preview+json',
-    'user-agent': 'octokit/rest.js v1.2.3' // v1.2.3 will be current version
-  },
+import ListAsTableComponent from '../components/tableList.vue'
+import CompletedComponent from '../components/completed.vue'
 
-  // custom GitHub Enterprise URL
-  baseUrl: 'https://api.github.com',
+import { octokit, ListLabel, CopyLabel, ListTemplates } from '../apis/gh'
 
-  // Node only: advanced request options can be passed as http(s) agent
-  agent: undefined
-})
+const TOKEN_NAME = 'gh-labels-replacer-token'
 
-const _list = async (owner, repo) => {
-  console.info(`[debug] list first 100 label in ${owner}/${repo}`)
-
-  const result = await octokit.issues.listLabelsForRepo({
-    owner,
-    repo,
-    per_page: 100
-  })
-  return result.data.map(v => {
-    return {
-      name: v.name,
-      color: v.color,
-      description: v.description,
-      url: v.url.replace('https://api.github.com/repos/', 'https://github.com/')
-    }
-  })
-}
-
-const submitTransfer = (token, current, dest) => {
+const submitTransfer = async (type, token, current, dest, options) => {
   console.log('Submit transfer the issue labels')
 
   octokit.authenticate({
-    type: 'oauth',
+    type: 'token',
     token: token
   })
 
-  return _list(current.owner, current.repo)
+  if (type === 'List') return await ListLabel(current.owner, current.repo)
+  else if (type === 'Copy')
+    return await CopyLabel(current, dest, {
+      force: options.includes('replace')
+    })
+  else return {}
 }
 
 export default {
   name: 'HomePage',
+  components: {
+    'list-as-table': ListAsTableComponent,
+    completed: CompletedComponent
+  },
   data() {
     return {
       token: '',
@@ -136,45 +205,122 @@ export default {
         repo: ''
       },
       callSubmit: false,
-      response: {}
+      isLoading: false,
+      response: [],
+      queryType: 'List',
+      queryTypes: [
+        {
+          name: 'List',
+          desc: 'List all labels in repository',
+          icon: 'format-list-bulleted'
+        },
+        {
+          name: 'Copy',
+          desc: 'Make a copy labels to dest repo',
+          icon: 'content-copy'
+        }
+      ],
+      options: ['replace'],
+      templates: []
     }
   },
-  async asyncData({ query }) {
-    netlifyIdentity.init({})
-    const user = netlifyIdentity.currentUser()
-    console.log(user)
+  async asyncData({ query, app }) {
+    const cookies = app.$cookies
 
-    const curr = {}
+    const curr = { owner: '', repo: '' }
     if (query.cowner) curr.owner = query.cowner
     if (query.crepo) curr.repo = query.crepo
 
-    const dest = {}
+    const dest = { owner: '', repo: '' }
     if (query.downer) dest.owner = query.downer
     if (query.drepo) dest.repo = query.drepo
 
-    if (user) {
-      return {
-        email: user.email,
-        token: user.token.access_token,
-        current: curr,
-        dest: dest,
-        callSubmit: query.submit
-      }
+    let token = query.access_token
+
+    if (!token) token = cookies.get(TOKEN_NAME)
+    else
+      cookies.set(TOKEN_NAME, query.access_token, {
+        maxAge: 60 * 60 * 24 * 7
+      })
+
+    let templates = []
+    if (token) {
+      octokit.authenticate({
+        type: 'token',
+        token: token
+      })
+
+      templates = await ListTemplates()
     }
-    return {}
+
+    return {
+      current: curr,
+      dest,
+      token: token,
+      queryType: query.type || 'List',
+      templates
+    }
   },
-  mounted() {
-    if (this.callSubmit)
-      this.response = submitTransfer(this.token, this.current, this.dest)
+  async mounted() {
+    if (this.callSubmit) {
+      this.isLoading = true
+      this.response = await submitTransfer(
+        this.queryType,
+        this.token,
+        this.current,
+        this.dest,
+        this.options
+      )
+      this.isLoading = false
+    }
   },
   methods: {
     login() {
-      if (this.token) netlifyIdentity.logout()
-      else netlifyIdentity.open('login')
+      const authenticator = new netlify({
+        site_id: '04a1e213-d4d1-4c68-970f-88a1cea8759d'
+      })
+
+      authenticator.authenticate(
+        { provider: 'github', scope: 'repo' },
+        (err, data) => {
+          if (err) {
+            this.error = 'Error Authenticating with GitHub: ' + err
+          }
+          this.token = data.token
+
+          this.$cookies.set(TOKEN_NAME, this.token, {
+            maxAge: 60 * 60 * 24 * 7
+          })
+        }
+      )
     },
-    submit() {
-      this.response = submitTransfer(this.token, this.current, this.dest)
+    async submit() {
+      this.isLoading = true
+      this.response = await submitTransfer(
+        this.queryType,
+        this.token,
+        this.current,
+        this.dest,
+        this.options
+      )
+      this.isLoading = false
+    },
+    updateByTemplate(template) {
+      console.info(
+        `[debug] update base repository from ${this.current.owner}/${
+          this.current.repo
+        } to ${template.owner}/${template.repo}`
+      )
+
+      this.current.owner = template.owner
+      this.current.repo = template.repo
     }
   }
 }
 </script>
+
+<style lang="scss">
+.response {
+  margin: 3rem;
+}
+</style>
