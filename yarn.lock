@@ -1005,10 +1005,10 @@
     node-fetch "^2.3.0"
     universal-user-agent "^2.0.1"
 
-"@octokit/rest@16.3.2":
-  version "16.3.2"
-  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-16.3.2.tgz#8dd08f5b11ce9dfb785669326fb4d904bf91d143"
-  integrity sha512-g1Shr7Bp5K3+o1VdUvQn//8ZIAFFODBi9GFdx4eqV2qZQtWwy28jmCGuS+CphnCj8PlQbFmZtXvmUh5xIRGFcA==
+"@octokit/rest@16.8.0":
+  version "16.8.0"
+  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-16.8.0.tgz#7d621a9f0d04178ba86c5c5d3792fa3e04a6409a"
+  integrity sha512-08jVneGXjopQr0SYeborTjGgVFCro6udW9l4bLJQXW0IUkQqCIyDKjUXNctWI8QnZ3W0jYELV9SCV4VPPLXAXg==
   dependencies:
     "@octokit/request" "2.2.1"
     before-after-hook "^1.2.0"
@@ -2320,18 +2320,18 @@ cookie-signature@1.0.6:
   resolved "https://registry.yarnpkg.com/cookie-signature/-/cookie-signature-1.0.6.tgz#e303a882b342cc3ee8ca513a79999734dab3ae2c"
   integrity sha1-4wOogrNCzD7oylE6eZmXNNqzriw=
 
-cookie-universal-nuxt@2.0.12:
-  version "2.0.12"
-  resolved "https://registry.yarnpkg.com/cookie-universal-nuxt/-/cookie-universal-nuxt-2.0.12.tgz#061bb1864d2dd010fad1c484ae982da42954bfd9"
-  integrity sha512-qZu3rOgsDjWqgq9dU+zCQl3RpsZeevI/c6fN+wgTRsQdSe8MSwYWpl+6Pitu0mXgZKVJ8e+JA3s3jDVoXV5szg==
+cookie-universal-nuxt@2.0.14:
+  version "2.0.14"
+  resolved "https://registry.yarnpkg.com/cookie-universal-nuxt/-/cookie-universal-nuxt-2.0.14.tgz#6fdf8e928eadd7611c04a57614fe2e29b60eb971"
+  integrity sha512-ih9Z0Z2K6eLaugTttGCVN85nogKseIFF/dqup3klvYC4mQS3+1IloqBqzTL/N7degBBAols2oppwYNDmaRtVig==
   dependencies:
     "@types/cookie" "^0.3.1"
-    cookie-universal "^2.0.12"
+    cookie-universal "^2.0.14"
 
-cookie-universal@^2.0.12:
-  version "2.0.12"
-  resolved "https://registry.yarnpkg.com/cookie-universal/-/cookie-universal-2.0.12.tgz#3627a56045a84c1c53618d38bd30b278db5633f4"
-  integrity sha512-/3ch/W145NHVmX2Oenykb3U/Knmu/78JJZxGY2qw28mIr/Ueve6D+A3BySAncvqIgNUy7lIgmAUjf1hV4D4d/A==
+cookie-universal@^2.0.14:
+  version "2.0.14"
+  resolved "https://registry.yarnpkg.com/cookie-universal/-/cookie-universal-2.0.14.tgz#1b4f27cffccfc2e47703fa235c1f67f931213041"
+  integrity sha512-m6J0DQa4/RQvXhzUG37EY1ynK3Uq1BKzp5hotST9olrzjrRx+B0vNPx7azg0/X0XrYQvL7MMbPXwou8m0BNDwg==
   dependencies:
     "@types/cookie" "^0.3.1"
     cookie "^0.3.1"
