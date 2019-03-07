@@ -13,8 +13,8 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
-    "@nuxtjs/axios": "5.4.0",
-    "@octokit/rest": "16.16.3",
+    "@nuxtjs/axios": "5.4.1",
+    "@octokit/rest": "16.17.0",
     "cookie-universal-nuxt": "2.0.14",
     "netlify-auth-providers": "1.0.0-alpha5",
     "nuxt": "2.4.5",
@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "babel-eslint": "8.2.6",
-    "eslint": "5.15.0",
+    "eslint": "5.15.1",
     "eslint-config-prettier": "3.6.0",
     "eslint-loader": "2.1.2",
     "eslint-plugin-prettier": "2.7.0",
