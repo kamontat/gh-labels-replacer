@@ -14,10 +14,10 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "5.4.1",
-    "@octokit/rest": "16.19.0",
+    "@octokit/rest": "16.20.0",
     "cookie-universal-nuxt": "2.0.14",
     "netlify-auth-providers": "1.0.0-alpha5",
-    "nuxt": "2.4.5",
+    "nuxt": "2.5.1",
     "nuxt-buefy": "0.3.4"
   },
   "devDependencies": {
