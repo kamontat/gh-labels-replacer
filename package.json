@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "5.4.1",
-    "@octokit/rest": "16.21.1",
+    "@octokit/rest": "16.22.0",
     "cookie-universal-nuxt": "2.0.14",
     "netlify-auth-providers": "1.0.0-alpha5",
     "nuxt": "2.5.1",
@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "babel-eslint": "8.2.6",
-    "eslint": "5.15.3",
+    "eslint": "5.16.0",
     "eslint-config-prettier": "3.6.0",
     "eslint-loader": "2.1.2",
     "eslint-plugin-prettier": "2.7.0",
