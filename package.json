@@ -17,7 +17,7 @@
     "@octokit/rest": "16.23.2",
     "cookie-universal-nuxt": "2.0.14",
     "netlify-auth-providers": "1.0.0-alpha5",
-    "nuxt": "2.5.1",
+    "nuxt": "2.6.1",
     "nuxt-buefy": "0.3.4"
   },
   "devDependencies": {
