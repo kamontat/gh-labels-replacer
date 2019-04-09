@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "5.4.1",
-    "@octokit/rest": "16.23.2",
+    "@octokit/rest": "16.23.4",
     "cookie-universal-nuxt": "2.0.14",
     "netlify-auth-providers": "1.0.0-alpha5",
     "nuxt": "2.6.1",
@@ -28,7 +28,7 @@
     "eslint-plugin-prettier": "2.7.0",
     "eslint-plugin-vue": "4.7.1",
     "node-sass": "4.11.0",
-    "nodemon": "1.18.10",
+    "nodemon": "1.18.11",
     "prettier": "1.16.4",
     "sass-loader": "7.1.0"
   }
