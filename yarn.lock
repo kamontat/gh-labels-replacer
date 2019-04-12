@@ -2044,10 +2044,10 @@ btoa-lite@^1.0.0:
   resolved "https://registry.yarnpkg.com/btoa-lite/-/btoa-lite-1.0.0.tgz#337766da15801210fdd956c22e9c6891ab9d0337"
   integrity sha1-M3dm2hWAEhD92VbCLpxokaudAzc=
 
-buefy@0.7.3:
-  version "0.7.3"
-  resolved "https://registry.yarnpkg.com/buefy/-/buefy-0.7.3.tgz#3008a20e624416e9d800d8775563afdb766e27d7"
-  integrity sha512-6PHKyDzU9BeExv9w5qcZJkjl9v73RWHeevWDRIZWD5TS4+dbmbzQ6z2EQc0sgbNHYesAgbX2Qd+xu5/KqDMFng==
+buefy@0.7.4:
+  version "0.7.4"
+  resolved "https://registry.yarnpkg.com/buefy/-/buefy-0.7.4.tgz#ed7b9de1b20c060df667d036a94ba62e4bdb32f2"
+  integrity sha512-XrG525fZTDYpjery5dloOyjH95HgZK3tnCc5XBSbY4Q/2GV+gRX18WDPk/duzDluSKGeN7E2at9dxIDfBqZypA==
   dependencies:
     bulma "0.7.4"
 
@@ -5954,12 +5954,12 @@ number-is-nan@^1.0.0:
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
   integrity sha1-CXtgK1NCKlIsGvuHkDGDNpQaAR0=
 
-nuxt-buefy@0.3.4:
-  version "0.3.4"
-  resolved "https://registry.yarnpkg.com/nuxt-buefy/-/nuxt-buefy-0.3.4.tgz#d8366a68b2dc20e25cb9f67a3175376f2f99089e"
-  integrity sha512-/iWS8UJwS9+356GlE/Lo8De4QEdC4yUKfbDySXVeye3s8jcK1Jd/FfPpYCzaRwQNA7ye2ANkDUF7Mo9tAbtzLQ==
+nuxt-buefy@0.3.5:
+  version "0.3.5"
+  resolved "https://registry.yarnpkg.com/nuxt-buefy/-/nuxt-buefy-0.3.5.tgz#2f2c63d31cf141b2ae5d1f30c070661c2791ac04"
+  integrity sha512-lAm0sTVHG8ra6sHhD7ITEgbn/vk+cl6rC9Mn1mbzwrqSPZqLeaxZvR3IG7+bWCOQmFFh9pLEtqEnmEgLXzQcaw==
   dependencies:
-    buefy "0.7.3"
+    buefy "0.7.4"
 
 nuxt@2.6.1:
   version "2.6.1"
@@ -7202,10 +7202,10 @@ prettier@1.16.3:
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.16.3.tgz#8c62168453badef702f34b45b6ee899574a6a65d"
   integrity sha512-kn/GU6SMRYPxUakNXhpP0EedT/KmaPzr0H5lIsDogrykbaxOpOfAFfk5XA7DZrJyMAv1wlMV3CPcZruGXVVUZw==
 
-prettier@1.16.4:
-  version "1.16.4"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.16.4.tgz#73e37e73e018ad2db9c76742e2647e21790c9717"
-  integrity sha512-ZzWuos7TI5CKUeQAtFd6Zhm2s6EpAD/ZLApIhsF9pRvRtM1RFo61dM/4MSRUA0SuLugA/zgrZD8m0BaY46Og7g==
+prettier@1.17.0:
+  version "1.17.0"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.17.0.tgz#53b303676eed22cc14a9f0cec09b477b3026c008"
+  integrity sha512-sXe5lSt2WQlCbydGETgfm1YBShgOX4HxQkFPvbxkcwgDvGDeqVau8h+12+lmSVlP3rHPz0oavfddSZg/q+Szjw==
 
 pretty-bytes@^5.1.0:
   version "5.1.0"
