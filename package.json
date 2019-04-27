@@ -27,7 +27,7 @@
     "eslint-loader": "2.1.2",
     "eslint-plugin-prettier": "2.7.0",
     "eslint-plugin-vue": "4.7.1",
-    "node-sass": "4.11.0",
+    "node-sass": "4.12.0",
     "nodemon": "1.18.11",
     "prettier": "1.17.0",
     "sass-loader": "7.1.0"
