@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "5.5.4",
-    "@octokit/rest": "16.28.4",
+    "@octokit/rest": "16.28.5",
     "cookie-universal-nuxt": "2.0.16",
     "netlify-auth-providers": "1.0.0-alpha5",
     "nuxt": "2.8.1",
