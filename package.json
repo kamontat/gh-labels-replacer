@@ -14,11 +14,11 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "5.6.0",
-    "@octokit/rest": "16.28.9",
+    "@octokit/rest": "16.29.0",
     "cookie-universal-nuxt": "2.0.17",
     "netlify-auth-providers": "1.0.0-alpha5",
     "nuxt": "2.9.2",
-    "nuxt-buefy": "0.3.14"
+    "nuxt-buefy": "0.3.15"
   },
   "devDependencies": {
     "babel-eslint": "8.2.6",
