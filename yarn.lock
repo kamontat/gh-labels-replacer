@@ -1238,10 +1238,10 @@
     once "^1.4.0"
     universal-user-agent "^2.1.0"
 
-"@octokit/rest@16.29.0":
-  version "16.29.0"
-  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-16.29.0.tgz#5bbbfc818a44bb9ab32bee72cc0acc32e4556058"
-  integrity sha512-t01+Hz6sUJx2/HzY4KSgmST5n7KcTYr8i6+UwqS6TkgyjyA6YmeTxVhZrQUobEXaDdQFxs1dRhh1hgmOo6OF9Q==
+"@octokit/rest@16.30.0":
+  version "16.30.0"
+  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-16.30.0.tgz#c14f177b7378f330ec6ec6ae49b68af359d09053"
+  integrity sha512-TN5MbqVuqxT/s87D6tGe3zsMvyHUQSkGFMBHuwBToPQGV3eG2a67rJW2rag2vJr7JusWyERDhQ4g/4HvFo9B1g==
   dependencies:
     "@octokit/request" "^5.0.0"
     "@octokit/request-error" "^1.0.2"
@@ -2809,10 +2809,10 @@ cookie-signature@1.0.6:
   resolved "https://registry.yarnpkg.com/cookie-signature/-/cookie-signature-1.0.6.tgz#e303a882b342cc3ee8ca513a79999734dab3ae2c"
   integrity sha1-4wOogrNCzD7oylE6eZmXNNqzriw=
 
-cookie-universal-nuxt@2.0.17:
-  version "2.0.17"
-  resolved "https://registry.yarnpkg.com/cookie-universal-nuxt/-/cookie-universal-nuxt-2.0.17.tgz#efa066cade8bc28ab81046c35b6557e3e4ec29fb"
-  integrity sha512-kJTLOJFOJBiWHd8ehLnheTNyFJbc4zqdZ9YinDSZmWgBMKOrNPd+3hTCsSVGCmybJdpmEJkDenSbRg/xFouqTQ==
+cookie-universal-nuxt@2.0.18:
+  version "2.0.18"
+  resolved "https://registry.yarnpkg.com/cookie-universal-nuxt/-/cookie-universal-nuxt-2.0.18.tgz#95e762a88b5a5b6c23db05521c146260b5576358"
+  integrity sha512-+5ciWAm1B15JN5e4LVnU4Ovs9KqBeYFYwaHrm9ThDZr/12u9REJfxH3wji0iY9NnF2ard3ULlD+R4uEQ0vUNKg==
   dependencies:
     "@types/cookie" "^0.3.1"
     cookie-universal "^2.0.16"
