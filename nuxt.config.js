@@ -9,30 +9,30 @@ module.exports = {
   head: {
     title: pkg.name,
     meta: [{
-        charset: 'utf-8'
+        charset: 'utf-8',
       },
       {
         name: 'viewport',
-        content: 'width=device-width, initial-scale=1'
+        content: 'width=device-width, initial-scale=1',
       },
       {
         hid: 'description',
         name: 'description',
-        content: pkg.description
-      }
+        content: pkg.description,
+      },
     ],
     link: [{
       rel: 'icon',
       type: 'image/x-icon',
-      href: '/favicon.ico'
-    }]
+      href: '/favicon.ico',
+    }, ],
   },
 
   /*
    ** Customize the progress-bar color
    */
   loading: {
-    color: '#fff'
+    color: '#fff',
   },
 
   /*
@@ -52,10 +52,10 @@ module.exports = {
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
     // Doc: https://github.com/nuxt-community/gtm-module#setup
-    '@nuxtjs/gtm'
+    '@nuxtjs/gtm',
     // Doc: https://buefy.github.io/#/documentation
     'nuxt-buefy',
-    'cookie-universal-nuxt'
+    'cookie-universal-nuxt',
   ],
 
   /*
@@ -84,7 +84,7 @@ module.exports = {
 
     noscript: true,
     noscriptId: 'gtm-noscript',
-    noscriptURL: 'https://www.googletagmanager.com/ns.html'
+    noscriptURL: 'https://www.googletagmanager.com/ns.html',
   },
 
   /*
@@ -101,9 +101,9 @@ module.exports = {
           enforce: 'pre',
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
-          exclude: /(node_modules)/
+          exclude: /(node_modules)/,
         })
       }
-    }
-  }
+    },
+  },
 }
