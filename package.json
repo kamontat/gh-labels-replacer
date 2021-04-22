@@ -19,7 +19,7 @@
     "cookie-universal-nuxt": "2.1.3",
     "netlify-auth-providers": "1.0.0-alpha5",
     "nuxt": "2.12.2",
-    "nuxt-buefy": "0.3.30"
+    "nuxt-buefy": "0.4.7"
   },
   "devDependencies": {
     "babel-eslint": "10.1.0",
