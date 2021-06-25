@@ -1,0 +1,44 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: weekly
+    day: friday
+    time: "02:00"
+    timezone: Asia/Bangkok
+  open-pull-requests-limit: 10
+  reviewers:
+  - kamontat
+  ignore:
+  - dependency-name: nuxt-buefy
+    versions:
+    - 0.4.4
+    - 0.4.5
+    - 0.4.6
+  - dependency-name: "@octokit/rest"
+    versions:
+    - 18.0.15
+    - 18.1.0
+    - 18.1.1
+    - 18.2.1
+    - 18.3.2
+    - 18.3.5
+    - 18.4.0
+    - 18.5.2
+  - dependency-name: nuxt
+    versions:
+    - 2.14.12
+    - 2.15.0
+    - 2.15.2
+    - 2.15.3
+  - dependency-name: "@nuxtjs/axios"
+    versions:
+    - 5.12.5
+    - 5.13.0
+  - dependency-name: sass-loader
+    versions:
+    - 10.1.1
+  - dependency-name: eslint-plugin-prettier
+    versions:
+    - 3.3.1
